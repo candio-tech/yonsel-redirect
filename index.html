@@ -41,24 +41,38 @@
         }
     </style>
     <script>
-        // Immediate redirect to app
-        setTimeout(function() {
+        // Try to open app
+        function openApp() {
+            // Try custom URL scheme
             window.location.href = "yonsel://auth/callback";
-        }, 100);
+            
+            // Fallback: if app not installed, stay on page (don't redirect to App Store)
+            // This prevents "Cannot Connect to App Store" error
+        }
         
-        // Fallback: redirect to App Store after 2 seconds if app not installed
-        setTimeout(function() {
-            window.location.href = "https://apps.apple.com/app/yonsel";
-        }, 2000);
+        // Auto-open on page load
+        setTimeout(openApp, 100);
     </script>
 </head>
 <body>
     <div class="container">
         <h1>Opening Yonsel...</h1>
         <div class="spinner"></div>
-        <p style="color: #666; font-size: 0.9em;">
-            If the app doesn't open automatically, 
-            <a href="https://apps.apple.com/app/yonsel" style="color: #4A90E2;">download it here</a>
+        <p style="color: #666; font-size: 0.9em; margin-top: 20px;">
+            If the app doesn't open automatically:
+        </p>
+        <button onclick="openApp()" style="
+            margin-top: 10px;
+            padding: 12px 24px;
+            background: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        ">Try Again</button>
+        <p style="color: #666; font-size: 0.9em; margin-top: 20px;">
+            Make sure you have the Yonsel app installed.
         </p>
     </div>
 </body>
