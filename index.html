@@ -43,13 +43,8 @@
     <script>
         // Try to open app
         function openApp() {
-            // Create a hidden link and click it (better for iOS)
-            var link = document.createElement('a');
-            link.href = 'yonsel://auth/callback';
-            link.style.display = 'none';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            // Try Universal Link first (this will work in email)
+            window.location.href = 'https://candio-tech.github.io/yonsel-redirect/auth/callback';
         }
         
         // Auto-open on page load
@@ -63,7 +58,7 @@
         <p style="color: #666; font-size: 0.9em; margin-top: 20px;">
             If the app doesn't open automatically:
         </p>
-        <a href="yonsel://auth/callback" onclick="openApp(); return false;" style="
+        <a href="https://candio-tech.github.io/yonsel-redirect/auth/callback" onclick="openApp(); return false;" style="
             display: inline-block;
             margin-top: 10px;
             padding: 12px 24px;
