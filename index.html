@@ -43,11 +43,13 @@
     <script>
         // Try to open app
         function openApp() {
-            // Try custom URL scheme
-            window.location.href = "yonsel://auth/callback";
-            
-            // Fallback: if app not installed, stay on page (don't redirect to App Store)
-            // This prevents "Cannot Connect to App Store" error
+            // Create a hidden link and click it (better for iOS)
+            var link = document.createElement('a');
+            link.href = 'yonsel://auth/callback';
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
         
         // Auto-open on page load
@@ -61,7 +63,8 @@
         <p style="color: #666; font-size: 0.9em; margin-top: 20px;">
             If the app doesn't open automatically:
         </p>
-        <button onclick="openApp()" style="
+        <a href="yonsel://auth/callback" onclick="openApp(); return false;" style="
+            display: inline-block;
             margin-top: 10px;
             padding: 12px 24px;
             background: #4A90E2;
@@ -70,7 +73,8 @@
             border-radius: 8px;
             font-size: 16px;
             cursor: pointer;
-        ">Try Again</button>
+            text-decoration: none;
+        ">Try Again</a>
         <p style="color: #666; font-size: 0.9em; margin-top: 20px;">
             Make sure you have the Yonsel app installed.
         </p>
